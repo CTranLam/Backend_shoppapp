@@ -48,7 +48,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 return;
             }
             final String token = authHeader.substring(7);
-            final String phoneNumber = jwtTokenUtil.extractPhoneNumber(token);
+            final String phoneNumber = jwtTokenUtil.extractPhoneNumber(token); // Lay value thong qua key
             if (phoneNumber != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 User userDetails = (User) userDetailsService.loadUserByUsername(phoneNumber);
                 if(jwtTokenUtil.validateToken(token, userDetails)) {

@@ -78,6 +78,7 @@ public class UserService implements IUserService {
                 throw new BadCredentialsException("Wrong phone number or password");
             }
         }
+        // giong phan load User cua CustomUserDetailService()
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 phoneNumber, password,
                 existingUser.getAuthorities()
@@ -85,7 +86,8 @@ public class UserService implements IUserService {
 
         //authenticate with Java Spring security
         //add thong tin vao authenticationManager
-        authenticationManager.authenticate(authenticationToken);
-        return jwtTokenUtil.generateToken(existingUser);
+        authenticationManager.authenticate(authenticationToken); // authenticationToken luu name,password real, authorities
+        return jwtTokenUtil.generateToken(existingUser); // return ve token duoc sinh ra, xong se cam token do de di vao cac api
+        // khi token vao api se phai vao websecurityConfig se xem quyen
     }
 }
